@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @copyright Copyright (c) 2016 www.magebuzz.com
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <timecountdown>
+            <display_place>
+                <product_details>1</product_details>
+                <category_details>1</category_details>
+                <homepage>1</homepage>
+            </display_place>
+            <style>
+                <style_select>simple</style_select>
+            </style>
+        </timecountdown>
+    </default>
+</config>

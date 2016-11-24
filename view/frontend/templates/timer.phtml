@@ -1,0 +1,68 @@
+<?php
+$style = $block->getScopeConfig('timecountdown/style/style_select');
+$jsRequireName = '';
+if ($style == 'simple') {
+    $jsRequireName = '"simple_style"';
+} else if ($style == 'colorful') {
+    $jsRequireName = '"colorful_style"';
+} else if ($style == 'white') {
+    $jsRequireName = '"white_style"';
+}
+if ($block->getPageType() == 'product') {
+    $product = $block->getProduct();
+    $isDisplayCountdown = $block->isPriceCountdown($product);
+    if ($isDisplayCountdown) {
+        $toDate = $product->getSpecialToDate() ? strtotime($product->getSpecialToDate()) : '';
+        ?>
+        <div class="mb-timecountdown-container timer-product timer-<?php echo $style; ?>" 
+             data-todate="<?php echo $toDate; ?>" data-prd_id="<?php echo $product->getId(); ?>">
+            <div class="timer-heading"><?php echo __('PRICE COUNTDOWN') . ':' ?></div>
+            <div class="timer-countbox" id="price-countdown-<?php echo $product->getId(); ?>"></div>
+        </div>
+        <?php
+    }
+}
+?>
+<script type="text/javascript">
+    'use strict';
+    require(['jquery', <?php if ($jsRequireName != '') {echo $jsRequireName;} ?>], function ($) {
+        $(document).ready(function () {
+            $('.mb-timecountdown-container').each(function () {
+                var toDate = $(this).data('todate');
+                if (toDate != '') {
+                    var nowTime = (new Date()).getTime() / 1000;
+                    var remainTime = toDate - nowTime + (new Date).getTimezoneOffset() * 60;
+                    if (remainTime > 0) {
+                        var style = '<?php echo $style; ?>';
+                        if (style == 'simple') {
+                            $(this).children('.timer-countbox').countdown({until: remainTime});
+                        } else if (style == 'colorful') {
+                            var prdId = $(this).data('prd_id');
+                            toDate = new Date(toDate * 1000);
+                            var toDateStr = toDate.getUTCFullYear() + '/' + (parseInt(toDate.getUTCMonth())+1) + '/' + toDate.getUTCDate() + ' ' + toDate.getUTCHours() + ':00:00';
+                            
+                            $(this).children('.timer-countbox').countdowntimer({
+                                dateAndTime : toDateStr
+                            });
+
+                        } else if (style == 'white') {
+                            var prdId = $(this).data('prd_id');
+                            toDate = new Date(toDate * 1000);
+                            $(this).children('.timer-countbox').syotimer({
+                                year: toDate.getUTCFullYear(),
+                                month: parseInt(toDate.getUTCMonth())+1,
+                                day: toDate.getUTCDate(),
+                                hour: toDate.getUTCHours(),
+                                minute: 0,
+                                headTitle: '',
+                                effectType: 'opacity',
+
+                            });
+                        }
+                    }
+                }
+            });
+
+        });
+    });
+</script>
