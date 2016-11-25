@@ -10,6 +10,7 @@
         <css src="Magebuzz_Timecountdown::css/simple.countdown.css" />
         <css src="Magebuzz_Timecountdown::css/colorful.countdown.css" />
         <css src="Magebuzz_Timecountdown::css/white.countdown.css" />
+        <css src="Magebuzz_Timecountdown::css/flip.countdown.css" />
         <css src="Magebuzz_Timecountdown::css/timer.css"/>
        
     </head>

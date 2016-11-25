@@ -63,7 +63,7 @@ class Timecountdown extends \Magento\Framework\View\Element\Template
     
     public function getCategory()
     {
-        return $this->_coreRegistry->registry('category');
+        return $this->_coreRegistry->registry('current_category');
     }
     
     public function getPageType() {

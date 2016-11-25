@@ -12,10 +12,40 @@
     box-sizing: border-box;
 }
 
-.mb-timecountdown-container.timer-simple .timer-countbox{
-    min-height: 50px;
-}
 
 .mb-timecountdown-container.timer-homepage {
     margin-top: -25px;
 }
+
+
+.mb-timecountdown-container.timer-simple .timer-countbox{
+    min-height: 50px;
+}
+
+.mb-timecountdown-container.timer-flip .timer-tb {
+    border:0;
+}
+.mb-timecountdown-container.timer-flip table td {
+    padding: 0;
+}
+.mb-timecountdown-container.timer-flip .timer-tb-md .timer-lbl {
+    width: 72px;
+    padding-right: 10px;
+}
+.mb-timecountdown-container.timer-flip .timer-tb-sm .timer-lbl {
+    width: 48px;
+    font-size: 80%;
+    padding-right: 10px;
+}
+.mb-timecountdown-container.timer-flip .timer-tb-xs .timer-lbl {
+    width: 32px;
+    font-size: 55%;
+    padding-right: 5px;
+}
+.mb-timecountdown-container.timer-flip .timer-lbl {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+
