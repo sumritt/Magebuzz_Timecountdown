@@ -25,10 +25,6 @@
                     <label>Display Price Countdown in Products in Category Details Page</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="homepage" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
-                    <label>Display Price Countdown in Products in Homepage</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
             </group>
             <group id="style" translate="label" type="text" sortOrder="2" showInDefault="1" showInStore="1"
                    showInWebsite="1">
@@ -36,6 +32,39 @@
                 <field id="style_select" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
                     <label>Select Style of Price Countdown</label>
                     <source_model>Magebuzz\Timecountdown\Model\Config\Source\Styles</source_model>
+                </field>
+            </group>
+            <group id="homepage" translate="label" type="text" sortOrder="3" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Homepage</label>
+                <field id="show_in_homepage" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Price Countdown in Homepage</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_in_one" translate="label" type="select" sortOrder="2" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display All Products in One Countdown Clock</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+                        <field id="show_in_homepage">1</field>
+                    </depends>
+                </field>
+                <field id="fromdate" translate="label" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>From Date</label>
+                    <frontend_model>Magebuzz\Timecountdown\Block\System\Config\DatePicker</frontend_model>
+                    <validate>validate-date</validate>
+                    <depends>
+						<field id="show_in_homepage">1</field>
+                        <field id="display_in_one">1</field>
+                    </depends>
+                </field>
+                <field id="todate" translate="label" sortOrder="4" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>To Date</label>
+                    <frontend_model>Magebuzz\Timecountdown\Block\System\Config\DatePicker</frontend_model>
+                    <validate>validate-date</validate>
+                    <depends>
+						<field id="show_in_homepage">1</field>
+                        <field id="display_in_one">1</field>
+                    </depends>
                 </field>
             </group>
         </section>

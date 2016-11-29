@@ -46,8 +46,8 @@ class Timecountdown extends \Magento\Framework\View\Element\Template
     public function isPriceCountdown($product)
     { 
         $currentDate = strtotime($this->_date->gmtDate());
-        $todate = $product->getSpecialToDate() ? strtotime($product->getSpecialToDate()) : 0;
-        $fromdate = $product->getSpecialFromDate() ? strtotime($product->getSpecialFromDate()) : 0;
+        $todate = $product->getSpecialToDate() ? (strtotime($product->getSpecialToDate())-$this->_date->getGmtOffset()) : 0;
+        $fromdate = $product->getSpecialFromDate() ? (strtotime($product->getSpecialFromDate())-$this->_date->getGmtOffset()) : 0;
         if ($product->getSpecialPrice() && $product->getIsShowCountdown() && $todate) {
             if ($todate >= $currentDate && $fromdate <= $currentDate) {
                 return true;
@@ -71,8 +71,10 @@ class Timecountdown extends \Magento\Framework\View\Element\Template
             return 'product';
         } else if ( $this->_category && $this->_category->getId()) {
             return 'category';
-        } 
-        return '';
+        } else if ($this->getScopeConfig('timecountdown/homepage/display_in_one')) {
+            return 'homepage-one';
+        }
+        return 'homepage';
     }
     
     public function getScopeConfig($path) {

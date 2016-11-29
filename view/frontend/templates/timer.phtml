@@ -3,8 +3,8 @@ $style = $block->getScopeConfig('timecountdown/style/style_select');
 $jsRequireName = '';
 if ($style == 'simple') {
     $jsRequireName = '"simple_style"';
-} else if ($style == 'colorful') {
-    $jsRequireName = '"colorful_style"';
+} else if ($style == 'reverse') {
+    $jsRequireName = '"reverse_style"';
 } else if ($style == 'white') {
     $jsRequireName = '"white_style"';
 }  else if ($style == 'flip') {
@@ -19,7 +19,7 @@ if ($pageType == 'product') {
         $toDate = $product->getSpecialToDate() ? strtotime($product->getSpecialToDate()) : '';
         ?>
         <div class="mb-timecountdown-container timer-product timer-<?php echo $style; ?>" 
-             data-todate="<?php echo $toDate; ?>" data-prd_id="<?php echo $product->getId(); ?>">
+             data-todate="<?php echo $toDate; ?>">
             <div class="timer-heading"><?php echo __('PRICE COUNTDOWN') . ':' ?></div>
             <div class="timer-countbox" id="price-countdown-<?php echo $product->getId(); ?>"></div>
         </div>
@@ -40,7 +40,7 @@ if ($pageType == 'product') {
                         var style = '<?php echo $style; ?>';
                         if (style == 'simple') {
                             $(this).children('.timer-countbox').countdown({until: remainTime});
-                        } else if (style == 'colorful') {
+                        } else if (style == 'reverse') {
                             toDate = new Date(toDate * 1000);
                             var toDateStr = toDate.getUTCFullYear() + '/' + (parseInt(toDate.getUTCMonth())+1) + '/' + toDate.getUTCDate();
                             $(this).children('.timer-countbox').countdowntimer({
@@ -63,6 +63,8 @@ if ($pageType == 'product') {
                                 var size = 'md';
                             } else if (pageType == 'category') {
                                 var size = 'sm';
+                            } else if (pageType == 'homepage-one'){
+                                var size = 'md';
                             } else {
                                 var size = 'xs';
                             }

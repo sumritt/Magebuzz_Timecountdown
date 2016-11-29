@@ -8,20 +8,21 @@
     <head>
         <css src="Magebuzz_Timecountdown::css/owl.carousel.css"/>
         <css src="Magebuzz_Timecountdown::css/simple.countdown.css" />
-        <css src="Magebuzz_Timecountdown::css/colorful.countdown.css" />
-        <css src="Magebuzz_Timecountdown::css/white.countdown.css" />
+        <css src="Magebuzz_Timecountdown::css/reverse.countdown.css" />
         <css src="Magebuzz_Timecountdown::css/flip.countdown.css" />
         <css src="Magebuzz_Timecountdown::css/timer.css"/>
-       
     </head>
     <body>
+<!--        <referenceContainer name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="custom.heads" template="custom_head.phtml" />
+        </referenceContainer>-->
         <referenceContainer name="content.bottom">
             <block class="Magebuzz\Timecountdown\Block\Carousel" name="timecountdown.homepage.carousel" 
-                   template="carousel.phtml" ifconfig="timecountdown/display_place/homepage" />
+                   template="carousel.phtml" ifconfig="timecountdown/homepage/show_in_homepage" />
         </referenceContainer>
         <referenceContainer name="before.body.end">
             <block class="Magebuzz\Timecountdown\Block\Timecountdown" name="timecountdown.homepage.js"
-                   template="timer.phtml" ifconfig="timecountdown/display_place/homepage" />
+                   template="timer.phtml" ifconfig="timecountdown/homepage/show_in_homepage" />
         </referenceContainer>
     </body>
 </page>

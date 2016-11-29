@@ -11,11 +11,14 @@
             <display_place>
                 <product_details>1</product_details>
                 <category_details>1</category_details>
-                <homepage>1</homepage>
             </display_place>
             <style>
                 <style_select>simple</style_select>
             </style>
+            <homepage>
+                <show_in_homepage>1</show_in_homepage>
+                <display_in_one>1</display_in_one>
+            </homepage>
         </timecountdown>
     </default>
 </config>

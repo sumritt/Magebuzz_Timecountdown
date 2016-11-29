@@ -12,17 +12,20 @@ class Carousel extends \Magento\Catalog\Block\Product\AbstractProduct {
     protected $scopeConfig;
     protected $_productCollectionFactory;
     protected $urlHelper;
+    protected $_date;
 
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context, 
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory, 
         \Magento\Framework\Url\Helper\Data $urlHelper, 
+        \Magento\Framework\Stdlib\DateTime\DateTime $date,
         array $data = []
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->urlHelper = $urlHelper;
+        $this->_date = $date;
         parent::__construct($context, $data);
     }
 
@@ -56,16 +59,38 @@ class Carousel extends \Magento\Catalog\Block\Product\AbstractProduct {
     
     public function getProductPrice(\Magento\Catalog\Model\Product $product)
     {
-        $style = $this->scopeConfig->getValue(self::XML_PATH_TIMER_STYLE, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $result = parent::getProductPrice($product);
-        $toDate = $product->getSpecialToDate() ? strtotime($product->getSpecialToDate()) : '';
-        $result .= '
-        <div class="mb-timecountdown-container timer-homepage timer-'.$style.'" data-todate="' . $toDate . '" data-prd_id="' . $product->getId() . '">
-            <div class="timer-heading">PRICE COUNTDOWN: </div>
-            <div class="timer-countbox" id="price-countdown-'.$product->getId().'"></div>
-        </div>
-        ';
+        if ($this->getScopeConfig('timecountdown/homepage/display_in_one') == '0') {
+            $style = $this->getStyle();
+            $toDate = $product->getSpecialToDate() ? strtotime($product->getSpecialToDate()) : '';
+            $result .= '
+            <div class="mb-timecountdown-container timer-homepage timer-'.$style.'" data-todate="' . $toDate . '" data-prd_id="' . $product->getId() . '">
+                <div class="timer-heading">PRICE COUNTDOWN: </div>
+                <div class="timer-countbox" id="price-countdown-'.$product->getId().'"></div>
+            </div>
+            ';
+        }
         return $result;
     }
 
+    public function getScopeConfig($path) {
+        return $this->_scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+
+    public function getStyle() {
+        return $this->getScopeConfig(self::XML_PATH_TIMER_STYLE);
+    }
+
+    public function isPriceCountdown()
+    { 
+        $currentDate = strtotime($this->_date->gmtDate());
+        $todate = $this->getScopeConfig('timecountdown/homepage/todate');
+        $todate = strtotime($todate) ? (strtotime($todate)-$this->_date->getGmtOffset()) : 0;
+        $fromdate = $this->getScopeConfig('timecountdown/homepage/fromdate');
+        $fromdate = strtotime($fromdate) ? (strtotime($fromdate)-$this->_date->getGmtOffset()) : 0;
+        if ($todate && $todate >= $currentDate && $fromdate <= $currentDate) {
+            return true;
+        }
+        return false;
+    }
 }

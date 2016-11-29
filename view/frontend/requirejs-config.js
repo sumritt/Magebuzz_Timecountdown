@@ -3,8 +3,7 @@ var config = {
         'magebuzz/owlcarousel': 'Magebuzz_Timecountdown/js/owl.carousel.min',
         'jquery_plugin': 'Magebuzz_Timecountdown/js/jquery.plugin',
         'simple_style': 'Magebuzz_Timecountdown/js/simple.countdown',
-        'colorful_style': 'Magebuzz_Timecountdown/js/colorful.countdown',
-        'white_style': 'Magebuzz_Timecountdown/js/white.countdown',
+        'reverse_style': 'Magebuzz_Timecountdown/js/reverse.countdown',
         'flip_style': 'Magebuzz_Timecountdown/js/flip.countdown'
     },
     shim: {
@@ -17,10 +16,7 @@ var config = {
         'simple_style': {
             deps: ['jquery', 'jquery_plugin']
         },
-        'colorful_style': {
-            deps: ['jquery']
-        },
-        'white_style': {
+        'reverse_style': {
             deps: ['jquery']
         },
         'flip_style': {

@@ -1,6 +1,7 @@
 <?php
 $productCollection = $block->getProductCollection();
 if (count($productCollection) > 0) {
+    $isDisplayInOne = $block->getScopeConfig('timecountdown/homepage/display_in_one');
     ?>
     <script type="text/javascript">
         require(['jquery', 'magebuzz/owlcarousel'], function ($) {
@@ -15,6 +16,17 @@ if (count($productCollection) > 0) {
         });
     </script>
     <div class="magebuzz-timecountdown-slider">
+        <?php
+        if ($isDisplayInOne && $block->isPriceCountdown()) {
+            $style = $block->getStyle();
+            $toDate = strtotime($block->getScopeConfig('timecountdown/homepage/todate'));
+            ?>
+            <div class="mb-timecountdown-container timer-homepage-one timer-<?php echo $style; ?> "
+                 data-todate="<?php echo $toDate; ?>">
+                <div class="timer-heading"><?php echo __('PRICE COUNTDOWN') . ':' ?></div>
+                <div class="timer-countbox"></div>
+            </div>
+        <?php } ?>
         <div id="mb-timecountdown-carousel">
             <?php
             $_helper = $this->helper('Magento\Catalog\Helper\Output');

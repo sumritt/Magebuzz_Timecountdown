@@ -11,8 +11,7 @@ class Styles implements \Magento\Framework\Option\ArrayInterface
     {
         return [
             ['value' => 'simple', 'label' => __('Simple')], 
-            ['value' => 'colorful', 'label' => __('Colorful')], 
-            ['value' => 'white', 'label' => __('White')],
+            ['value' => 'reverse', 'label' => __('Reverse')],
             ['value' => 'flip', 'label' => __('Flip')]
         ];
     }
